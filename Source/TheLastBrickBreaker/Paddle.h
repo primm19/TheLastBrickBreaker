@@ -30,6 +30,6 @@ public:
 	class UCapsuleComponent* CapsuleCollider;
 
 	UPROPERTY(EditAnywhere, Category="Base Properties")
-	UStaticMeshComponent* PaddleMesh;
+	class UStaticMeshComponent* PaddleMesh;
 
 };
