@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "InputActionValue.h"
 #include "Paddle.generated.h"
 
 UCLASS()
@@ -18,6 +19,14 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Input")
+	class UInputMappingContext* PaddleMappingContext;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* MoveAction;
+
+	void Move(const FInputActionValue& value);
 
 public:	
 	// Called every frame

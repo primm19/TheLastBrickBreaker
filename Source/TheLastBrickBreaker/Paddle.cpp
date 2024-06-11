@@ -3,6 +3,10 @@
 
 #include "Paddle.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/InputComponent.h"
+#include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -23,7 +27,36 @@ APaddle::APaddle()
 void APaddle::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(PaddleMappingContext, 0);
+		}
+	}
 	
+}
+
+void APaddle::Move(const FInputActionValue& value)
+{
+	const float CurrentValue = value.Get<float>();
+	if (CurrentValue)
+	{
+		FVector CurrentLocation = GetActorLocation();
+
+		float MovementSpeed = 1500.f;
+		float MovementDistance = CurrentValue * MovementSpeed * UGameplayStatics::GetWorldDeltaSeconds(this);
+
+		FVector NewLocation = CurrentLocation + FVector(0.f, MovementDistance, 0.f);
+
+		float MinY = -1775.f;
+		float MaxY = 1775.f;
+
+		NewLocation.Y = FMath::Clamp(NewLocation.Y, MinY, MaxY);
+
+		SetActorLocation(NewLocation);
+	}
 }
 
 // Called every frame
@@ -37,6 +70,11 @@ void APaddle::Tick(float DeltaTime)
 void APaddle::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APaddle::Move);
+	}
 
 }
 
