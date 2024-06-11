@@ -22,9 +22,6 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UPROPERTY(EditAnywhere, Category = "Base Properties")
-	USceneComponent* DefaultRoot;
 	
 	UPROPERTY(EditAnywhere, Category = "Base Properties")
 	class USphereComponent* SphereCollider = nullptr;
