@@ -13,8 +13,8 @@ ABall::ABall()
 	SphereCollider = CreateDefaultSubobject<USphereComponent>(FName("Sphere Collider"));
 	SetRootComponent(SphereCollider);
 
-	PaddleMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Paddle Mesh"));
-	PaddleMesh->SetupAttachment(SphereCollider);
+	BallMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Sphere Mesh"));
+	BallMesh->SetupAttachment(SphereCollider);
 }
 
 // Called when the game starts or when spawned

@@ -30,5 +30,5 @@ public:
 	class USphereComponent* SphereCollider = nullptr;
 
 	UPROPERTY(EditAnywhere, Category="Base Properties")
-	class UStaticMeshComponent* PaddleMesh = nullptr;
+	class UStaticMeshComponent* BallMesh = nullptr;
 };
