@@ -26,7 +26,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Base Properties")
 	class UCapsuleComponent* CapsuleCollider;
+
+	UPROPERTY(EditAnywhere, Category="Base Properties")
 	UStaticMeshComponent* PaddleMesh;
 
 };
