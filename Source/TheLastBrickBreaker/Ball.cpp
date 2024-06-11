@@ -10,12 +10,8 @@ ABall::ABall()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-
-	DefaultRoot = CreateDefaultSubobject<USceneComponent>(FName("Default Scene Root"));
-	SetRootComponent(DefaultRoot);
-
 	SphereCollider = CreateDefaultSubobject<USphereComponent>(FName("Sphere Collider"));
-	SphereCollider->SetupAttachment(DefaultRoot);
+	SetRootComponent(SphereCollider);
 
 	PaddleMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Paddle Mesh"));
 	PaddleMesh->SetupAttachment(SphereCollider);
