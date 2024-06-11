@@ -38,9 +38,9 @@ void APaddle::BeginPlay()
 	
 }
 
-void APaddle::Move(const FInputActionValue& value)
+void APaddle::Move(const FInputActionValue& Value)
 {
-	const float CurrentValue = value.Get<float>();
+	const float CurrentValue = Value.Get<float>();
 	if (CurrentValue)
 	{
 		FVector CurrentLocation = GetActorLocation();
