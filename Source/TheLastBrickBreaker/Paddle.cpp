@@ -15,8 +15,11 @@ APaddle::APaddle()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("Capsule Collider"));
-	SetRootComponent(CapsuleCollider);
+	DefaultRoot = CreateDefaultSubobject<USceneComponent>(FName("Default Scene Root"));
+	SetRootComponent(DefaultRoot);
+	
+	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("CapsuleCollider"));
+	CapsuleCollider->SetupAttachment(DefaultRoot);
 
 	PaddleMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Paddle Mesh"));
 	PaddleMesh->SetupAttachment(CapsuleCollider);
@@ -50,8 +53,8 @@ void APaddle::Move(const FInputActionValue& Value)
 
 		FVector NewLocation = CurrentLocation + FVector(0.f, MovementDistance, 0.f);
 
-		float MinY = -1775.f;
-		float MaxY = 1775.f;
+		float MinY = -1700.f;
+		float MaxY = 1700.f;
 
 		NewLocation.Y = FMath::Clamp(NewLocation.Y, MinY, MaxY);
 
