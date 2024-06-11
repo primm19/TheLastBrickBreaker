@@ -12,7 +12,7 @@ APaddle::APaddle()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("Capsule Collider"));
-	RootComponent = CapsuleCollider;
+	SetRootComponent(CapsuleCollider);
 
 	PaddleMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Paddle Mesh"));
 	PaddleMesh->SetupAttachment(CapsuleCollider);
