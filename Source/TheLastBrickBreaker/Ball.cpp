@@ -3,6 +3,7 @@
 
 #include "Ball.h"
 #include "Components/SphereComponent.h"
+#include "TimerManager.h"
 
 // Sets default values
 ABall::ABall()
@@ -21,6 +22,8 @@ ABall::ABall()
 void ABall::BeginPlay()
 {
 	Super::BeginPlay();
+
+	GetWorld()->GetTimerManager().SetTimer(LevelStartTimerHandle, this, &ABall::MoveBall, 3.f, false);
 	
 }
 
@@ -29,5 +32,14 @@ void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ABall::MoveBall()
+{
+	if (SphereCollider)
+	{
+		FVector ImpulseForce = FVector(0.f, 0.f, -25000.f);
+		SphereCollider->AddImpulse(ImpulseForce);
+	}
 }
 

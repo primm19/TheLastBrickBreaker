@@ -28,4 +28,8 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="Base Properties")
 	class UStaticMeshComponent* BallMesh = nullptr;
+
+	FTimerHandle LevelStartTimerHandle;
+
+	void MoveBall();
 };
