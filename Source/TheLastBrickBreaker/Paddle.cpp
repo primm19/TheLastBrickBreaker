@@ -18,12 +18,19 @@ APaddle::APaddle()
 	DefaultRoot = CreateDefaultSubobject<USceneComponent>(FName("Default Scene Root"));
 	SetRootComponent(DefaultRoot);
 	
+	// Paddle
 	CapsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(FName("CapsuleCollider"));
 	CapsuleCollider->SetupAttachment(DefaultRoot);
 
 	PaddleMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Paddle Mesh"));
 	PaddleMesh->SetupAttachment(CapsuleCollider);
 
+	// Paddle (twin)
+	CapsuleCollider2 = CreateDefaultSubobject<UCapsuleComponent>(FName("CapsuleCollider 2"));
+	CapsuleCollider2->SetupAttachment(DefaultRoot);
+
+	PaddleMesh2 = CreateDefaultSubobject<UStaticMeshComponent>(FName("Paddle Mesh 2"));
+	PaddleMesh2->SetupAttachment(CapsuleCollider2);
 }
 
 // Called when the game starts or when spawned
@@ -53,10 +60,22 @@ void APaddle::Move(const FInputActionValue& Value)
 
 		FVector NewLocation = CurrentLocation + FVector(0.f, MovementDistance, 0.f);
 
+		/*
 		float MinY = -1700.f;
 		float MaxY = 1700.f;
 
 		NewLocation.Y = FMath::Clamp(NewLocation.Y, MinY, MaxY);
+		*/
+
+		if (NewLocation.Y < 0)
+		{
+			NewLocation.Y += 3400;
+		}
+		else if(NewLocation.Y>3400)
+		{
+			NewLocation.Y = 3400;
+		}
+
 
 		SetActorLocation(NewLocation);
 	}

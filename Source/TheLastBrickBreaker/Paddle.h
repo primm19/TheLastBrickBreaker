@@ -38,10 +38,19 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Base Properties")
 	USceneComponent* DefaultRoot;
 	
+
+	// Paddle
 	UPROPERTY(EditAnywhere, Category = "Base Properties")
 	class UCapsuleComponent* CapsuleCollider = nullptr;
 
 	UPROPERTY(EditAnywhere, Category="Base Properties")
 	class UStaticMeshComponent* PaddleMesh = nullptr;
 
+
+	// Paddle (twin)
+	UPROPERTY(EditAnywhere, Category = "Base Properties")
+	class UCapsuleComponent* CapsuleCollider2 = nullptr;
+
+	UPROPERTY(EditAnywhere, Category = "Base Properties")
+	class UStaticMeshComponent* PaddleMesh2 = nullptr;
 };
