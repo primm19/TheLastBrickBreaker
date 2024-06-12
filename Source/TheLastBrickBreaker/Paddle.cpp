@@ -73,7 +73,7 @@ void APaddle::Move(const FInputActionValue& Value)
 		}
 		else if(NewLocation.Y>3400)
 		{
-			NewLocation.Y = 3400;
+			NewLocation.Y -= 3400;
 		}
 
 
